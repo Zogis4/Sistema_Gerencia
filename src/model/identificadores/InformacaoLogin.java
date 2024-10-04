@@ -3,7 +3,7 @@ package model.identificadores;
 import java.time.LocalDateTime;
 import java.util.Random;
 
-public class InformacaoLogin {
+public class InformacaoLogin { // NAO USAR NAO USAR NAO USAR NAO USAR NAO USAR NAO USAR NAO USAR NAO USAR NAO USAR
     private String nome = "";
     private String senha = "";
     private String chaveRecuperacao = "";

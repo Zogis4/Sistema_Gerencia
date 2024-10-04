@@ -1,5 +1,9 @@
 package model.interfaces;
 
-public interface IFuncionarios {
+import model.identificadores.Funcionario;
 
+public interface IFuncionarios {
+    public void cadastrarFuncionario(String nomeFuncionario, String cargo, String ultimoAcesso, String idFuncionario);
+    public void alterarFuncionario();
+    public void desligarFuncionario();
 }
