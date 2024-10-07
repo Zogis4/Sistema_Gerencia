@@ -11,12 +11,14 @@ import model.identificadores.Login;
 
 
     public class TelaLogin extends JPanel {
-        JTextField textUsuario;
-        JPasswordField textSenha;
-        JButton buttonEntrar, buttonSair;
-        JCheckBox checkBoxLembrar;
-        JLabel linkEsqueceuSenha;
-        JFrame frame;
+        private JTextField textUsuario;
+        private JPasswordField textSenha;
+        private JButton buttonEntrar, buttonSair;
+        private JCheckBox checkBoxLembrar;
+        private JLabel linkEsqueceuSenha;
+        private JFrame frame;
+        private TelaLogin telaLogin;
+        private TelaPrograma telaPrograma;
 
         // Instância da classe Login com um usuário padrão
         public Login login;
@@ -120,6 +122,8 @@ import model.identificadores.Login;
         }
 
         public void configurarAcoes(JFrame frame, TelaLogin telaLogin, TelaPrograma telaPrograma) {
+            this.telaLogin = telaLogin;
+            this.telaPrograma = telaPrograma;
             buttonEntrar.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -204,6 +208,25 @@ import model.identificadores.Login;
             configurarEventosMenu(novoUsuario, options, ajuda);
 
             return menuBar;
+        }
+
+        //getters and setters
+
+
+        public TelaLogin getTelaLogin() {
+            return telaLogin;
+        }
+
+        public void setTelaLogin(TelaLogin telaLogin) {
+            this.telaLogin = telaLogin;
+        }
+
+        public TelaPrograma getTelaPrograma() {
+            return telaPrograma;
+        }
+
+        public void setTelaPrograma(TelaPrograma telaPrograma) {
+            this.telaPrograma = telaPrograma;
         }
 
         // Painel personalizado para aplicar o fundo degradê

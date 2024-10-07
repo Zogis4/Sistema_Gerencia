@@ -8,19 +8,39 @@ import java.awt.*;
 
 public class TelaPrograma {
 
-    public void renderizarPainelPrograma(JFrame frame, TelaLogin login, TelaPrograma telaPrograma) {
-        ImageIcon logoIcon = new ImageIcon("logoEmpresa.png");
+    private ImageIcon logoIcon;
+    private JPanel gradientPanel;
+    private JTabbedPane tabbedPane;
+    private JPanel arquivoPanel;
+    private JPanel funcionariosPanel;
+    private JPanel produtosPanel;
+    private JPanel pedidosPanel;
+    private JButton buttonVoltar;
+    private JButton buttonSair;
+    private JButton buttonCadastrar;
+    private JButton buttonAlterar;
+    private JButton buttonDesligar;
+    private JButton buttonAdicionar;
+    private JButton buttonAlterarEstoque;
+    private JButton buttonAlterarPreco;
+    private JButton buttonVerificar;
+    private JButton buttonRealizar;
+    private JButton buttonEncerrar;
+    private JButton buttonAlterarPedidos;
 
-        JPanel gradientPanel = new JPanel();
+    public void renderizarPainelPrograma(JFrame frame, TelaLogin login, TelaPrograma telaPrograma) {
+        logoIcon = new ImageIcon("logoEmpresa.png");
+
+        gradientPanel = new JPanel();
         gradientPanel.setLayout(new BorderLayout());
 
-        JTabbedPane tabbedPane = new JTabbedPane();
+        tabbedPane = new JTabbedPane();
         tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 
-        JPanel arquivoPanel = createArquivoPanel(frame, login, telaPrograma, logoIcon);
-        JPanel funcionariosPanel = createFuncionariosPanel(frame, logoIcon);
-        JPanel produtosPanel = createProdutosPanel(frame, logoIcon);
-        JPanel pedidosPanel = createPedidosPanel(frame, logoIcon);
+        arquivoPanel = createArquivoPanel(frame, login, telaPrograma, logoIcon);
+        funcionariosPanel = createFuncionariosPanel(frame, logoIcon);
+        produtosPanel = createProdutosPanel(frame, logoIcon);
+        pedidosPanel = createPedidosPanel(frame, logoIcon);
 
         tabbedPane.addTab("Arquivos", arquivoPanel);
         tabbedPane.addTab("Funcionários", funcionariosPanel);
@@ -42,8 +62,8 @@ public class TelaPrograma {
         panel.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(Box.createVerticalGlue());
 
-        JButton buttonVoltar = new JButton("Voltar ao Menu");
-        JButton buttonSair = new JButton("Sair");
+        buttonVoltar = new JButton("Voltar ao Menu");
+        buttonSair = new JButton("Sair");
 
         buttonVoltar.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttonSair.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -54,12 +74,12 @@ public class TelaPrograma {
 
         panel.add(Box.createVerticalGlue());
 
-        configurarEventosArquivo(frame, buttonVoltar, buttonSair, login, telaPrograma);
+        configurarEventosArquivo(frame, login, telaPrograma);
 
         return panel;
     }
 
-    private void configurarEventosArquivo(JFrame frame, JButton buttonVoltar, JButton buttonSair, TelaLogin login, TelaPrograma telaPrograma) {
+    private void configurarEventosArquivo(JFrame frame, TelaLogin login, TelaPrograma telaPrograma) {
         // Listener para o botão "Voltar ao Menu"
         buttonVoltar.addActionListener(e -> {
             // Mensagem de feedback ao usuário
@@ -101,9 +121,9 @@ public class TelaPrograma {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.add(Box.createVerticalGlue());
 
-        JButton buttonCadastrar = new JButton("Cadastrar Funcionário");
-        JButton buttonAlterar = new JButton("Alterar Funcionário");
-        JButton buttonDesligar = new JButton("Desligar Funcionário");
+        buttonCadastrar = new JButton("Cadastrar Funcionário");
+        buttonAlterar = new JButton("Alterar Funcionário");
+        buttonDesligar = new JButton("Desligar Funcionário");
 
         buttonCadastrar.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttonAlterar.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -117,12 +137,13 @@ public class TelaPrograma {
 
         panel.add(Box.createVerticalGlue());
 
-        configurarEventosFuncionario(frame, buttonCadastrar, buttonAlterar, buttonDesligar);
+        configurarEventosFuncionario(frame);
 
         return panel;
     }
 
-    private void configurarEventosFuncionario(JFrame frame, JButton buttonCadastrar, JButton buttonAlterar, JButton buttonDesligar) {
+    @Deprecated
+    private void configurarEventosFuncionario(JFrame frame) {
         // Listener para o botao "Cadastrar Funcionário"
         buttonCadastrar.addActionListener(e -> {
             // Exibe diálogos para capturar as informações do funcionário
@@ -202,9 +223,9 @@ public class TelaPrograma {
         panel.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(Box.createVerticalGlue());
 
-        JButton buttonAdicionar = new JButton("Adicionar Produto");
-        JButton buttonAlterarEstoque = new JButton("Alterar Estoque");
-        JButton buttonAlterarPreco = new JButton("Alterar Preço");
+        buttonAdicionar = new JButton("Adicionar Produto");
+        buttonAlterarEstoque = new JButton("Alterar Estoque");
+        buttonAlterarPreco = new JButton("Alterar Preço");
 
         buttonAdicionar.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttonAlterarEstoque.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -223,6 +244,7 @@ public class TelaPrograma {
         return panel;
     }
 
+    @Deprecated
     private void configurarEventosProduto(JFrame frame, JButton buttonAdicionar, JButton buttonAlterarEstoque, JButton buttonAlterarPreco) {
         // Listener para o botão "Adicionar Produto"
         buttonAdicionar.addActionListener(e -> {
@@ -309,15 +331,15 @@ public class TelaPrograma {
         panel.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(Box.createVerticalGlue());
 
-        JButton buttonVerificar = new JButton("Verificar Disponibilidade");
-        JButton buttonRealizar = new JButton("Realizar Pedido");
-        JButton buttonEncerrar = new JButton("Encerrar Pedido");
-        JButton buttonAlterar = new JButton("Alterar Pedido");
+        buttonVerificar = new JButton("Verificar Disponibilidade");
+        buttonRealizar = new JButton("Realizar Pedido");
+        buttonEncerrar = new JButton("Encerrar Pedido");
+        buttonAlterar = new JButton("Alterar Pedido");
 
         buttonVerificar.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttonRealizar.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttonEncerrar.setAlignmentX(Component.CENTER_ALIGNMENT);
-        buttonAlterar.setAlignmentX(Component.CENTER_ALIGNMENT);
+        buttonAlterarPedidos.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         panel.add(buttonVerificar);
         panel.add(Box.createRigidArea(new Dimension(0, 50)));
@@ -325,7 +347,7 @@ public class TelaPrograma {
         panel.add(Box.createRigidArea(new Dimension(0, 50)));
         panel.add(buttonEncerrar);
         panel.add(Box.createRigidArea(new Dimension(0, 50)));
-        panel.add(buttonAlterar);
+        panel.add(buttonAlterarPedidos);
 
         panel.add(Box.createVerticalGlue());
 
@@ -334,9 +356,10 @@ public class TelaPrograma {
         return panel;
     }
 
+    @Deprecated
     private void configurarEventosPedidos(JButton buttonVerificar, JButton buttonRealizar, JButton buttonEncerrar, JButton buttonAlterar) {
-        Pedido pedido = new Pedido();
 
+        /*
         // Ação para o botão "Verificar Disponibilidade"
         buttonVerificar.addActionListener(e -> {
             String nomeProduto = JOptionPane.showInputDialog(null, "Informe o nome do produto que deseja verificar:");
@@ -352,10 +375,11 @@ public class TelaPrograma {
                 JOptionPane.showMessageDialog(null, "Nenhum nome de produto foi informado.",
                         "Erro", JOptionPane.ERROR_MESSAGE);
             }
-        });
+        });*/
 
         // Ação para o botão "Realizar/Criar Pedido"
         buttonRealizar.addActionListener(e -> {
+            /*
             String nomePedido = JOptionPane.showInputDialog("Digite o nome do pedido:");
             String idPedido = JOptionPane.showInputDialog("Digite o ID do pedido:");
             String dataPedido = JOptionPane.showInputDialog("Digite a data do pedido:");
@@ -372,11 +396,12 @@ public class TelaPrograma {
             } else {
                 JOptionPane.showMessageDialog(null, "Preencha todos os campos corretamente.",
                         "Erro", JOptionPane.ERROR_MESSAGE);
-            }
+            }*/
         });
 
         // Ação para o botão "Encerrar Pedido"
         buttonEncerrar.addActionListener(e -> {
+            /*
             String IdPedido = JOptionPane.showInputDialog("Digite o id do pedido a ser encerrado:");
             if (IdPedido != null && !IdPedido.trim().isEmpty()) {
                 pedido.encerrarPedido();
@@ -385,11 +410,12 @@ public class TelaPrograma {
             } else {
                 JOptionPane.showMessageDialog(null, "Preencha todos os campos corretamente.",
                         "Erro", JOptionPane.ERROR_MESSAGE);
-            }
+            }*/
         });
 
         // Ação para o botão "Alterar Pedido"
         buttonAlterar.addActionListener(e -> {
+            /*
             String IdPedido = JOptionPane.showInputDialog("Digite o id do pedido a ser alterado:");
             String novoId = JOptionPane.showInputDialog("Digite o novo id do pedido:");
             String novaDescricao = JOptionPane.showInputDialog("Digite a nova descrição do pedido:");
@@ -405,8 +431,107 @@ public class TelaPrograma {
             } else {
                 JOptionPane.showMessageDialog(null, "Preencha todos os campos corretamente.",
                         "Erro", JOptionPane.ERROR_MESSAGE);
-            }
+            }*/
         });
+    }
+
+    //getters e setters
+
+
+    public JButton getButtonVoltar() {
+        return buttonVoltar;
+    }
+
+    public void setButtonVoltar(JButton buttonVoltar) {
+        this.buttonVoltar = buttonVoltar;
+    }
+
+    public JButton getButtonSair() {
+        return buttonSair;
+    }
+
+    public void setButtonSair(JButton buttonSair) {
+        this.buttonSair = buttonSair;
+    }
+
+    public JButton getButtonCadastrar() {
+        return buttonCadastrar;
+    }
+
+    public void setButtonCadastrar(JButton buttonCadastrar) {
+        this.buttonCadastrar = buttonCadastrar;
+    }
+
+    public JButton getButtonAlterar() {
+        return buttonAlterar;
+    }
+
+    public void setButtonAlterar(JButton buttonAlterar) {
+        this.buttonAlterar = buttonAlterar;
+    }
+
+    public JButton getButtonDesligar() {
+        return buttonDesligar;
+    }
+
+    public void setButtonDesligar(JButton buttonDesligar) {
+        this.buttonDesligar = buttonDesligar;
+    }
+
+    public JButton getButtonAdicionar() {
+        return buttonAdicionar;
+    }
+
+    public void setButtonAdicionar(JButton buttonAdicionar) {
+        this.buttonAdicionar = buttonAdicionar;
+    }
+
+    public JButton getButtonAlterarEstoque() {
+        return buttonAlterarEstoque;
+    }
+
+    public void setButtonAlterarEstoque(JButton buttonAlterarEstoque) {
+        this.buttonAlterarEstoque = buttonAlterarEstoque;
+    }
+
+    public JButton getButtonAlterarPreco() {
+        return buttonAlterarPreco;
+    }
+
+    public void setButtonAlterarPreco(JButton buttonAlterarPreco) {
+        this.buttonAlterarPreco = buttonAlterarPreco;
+    }
+
+    public JButton getButtonVerificar() {
+        return buttonVerificar;
+    }
+
+    public void setButtonVerificar(JButton buttonVerificar) {
+        this.buttonVerificar = buttonVerificar;
+    }
+
+    public JButton getButtonRealizar() {
+        return buttonRealizar;
+    }
+
+    public void setButtonRealizar(JButton buttonRealizar) {
+        this.buttonRealizar = buttonRealizar;
+    }
+
+    public JButton getButtonEncerrar() {
+        return buttonEncerrar;
+    }
+
+    public void setButtonEncerrar(JButton buttonEncerrar) {
+        this.buttonEncerrar = buttonEncerrar;
+    }
+
+    public JButton getButtonAlterarPedidos() {
+        return buttonAlterarPedidos;
+    }
+
+    public void setButtonAlterarPedidos(JButton buttonAlterarPedidos) {
+        this.buttonAlterarPedidos = buttonAlterarPedidos;
     }
 
     // Implementação do painel com marca d'água
