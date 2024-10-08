@@ -1,6 +1,7 @@
 package controler;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import model.ConectorDB;
 import model.identificadores.Funcionario;
 import model.identificadores.Login;
 import model.identificadores.Pedido;
@@ -20,6 +21,7 @@ public class ControleModoGrafico {
     private JFrame frame;
     private TelaLogin telaLogin;
     private TelaPrograma telaPrograma;
+    private ConectorDB conector = new ConectorDB();
 
     public ControleModoGrafico(){
         try {
@@ -36,25 +38,29 @@ public class ControleModoGrafico {
             public void run() {
                 frame = new JFrame("Sistema de Gerenciamento de Inventário");
                 TelaLogin telaLoginInstancia = new TelaLogin();
+                TelaPrograma telaProgramaInstancia = new TelaPrograma();
                 frame.setContentPane(telaLoginInstancia.renderizarPainelLogin(frame));
-                telaLoginInstancia.configurarAcoes(frame, new TelaLogin(), new TelaPrograma());
+                telaLoginInstancia.configurarAcoes(frame, telaLoginInstancia, telaProgramaInstancia);
+                telaProgramaInstancia.renderizarPainelPrograma(frame, telaLoginInstancia, telaProgramaInstancia);
 
-                telaLogin = telaLoginInstancia.getTelaLogin();
-                telaPrograma = telaLoginInstancia.getTelaPrograma();
+                telaLogin = telaLoginInstancia;
+                telaPrograma = telaProgramaInstancia;
 
                 frame.setSize(700, 600);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setLocationRelativeTo(null);
                 frame.setVisible(true);
+                setarBotoes();
+                atualizarDB();
             }
         });
         
-        setarBotoes();
+
     }
 
     private void setarBotoes() {
-        JButton buttonVoltar = telaPrograma.getButtonVoltar();
-        JButton buttonSair = telaPrograma.getButtonSair();
+        JButton buttonEntrar = telaLogin.getButtonEntrar();
+        JButton buttonSair = telaLogin.getButtonSair();
         JButton buttonCadastrarFuncionario = telaPrograma.getButtonCadastrarFuncionario();
         JButton buttonAlterarFuncionario = telaPrograma.getButtonAlterarFuncionario();
         JButton buttonDesligarFuncionario = telaPrograma.getButtonDesligarFuncionario();
@@ -65,6 +71,36 @@ public class ControleModoGrafico {
         JButton buttonRealizarPedido = telaPrograma.getButtonRealizarPedido();
         JButton buttonEncerrarPedido = telaPrograma.getButtonEncerrarPedido();
         JButton buttonAlterarPedidos = telaPrograma.getButtonAlterarPedidos();
+
+        buttonEntrar.addActionListener(e -> {
+            JTextField textUsuario = telaLogin.getTextUsuario();
+            JPasswordField textSenha = telaLogin.getTextSenha();
+            String usuario = textUsuario.getText().trim();
+            String senha = new String(textSenha.getPassword()).trim();
+            boolean naoEncontrado = true;
+
+            if (usuario.isEmpty() || senha.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos.",
+                        "Erro", JOptionPane.ERROR_MESSAGE);
+            } else {
+                for(Login login : usuarios) {
+                    if (login.verificarLogin(usuario, senha)) {
+                        JOptionPane.showMessageDialog(null, "Login realizado com sucesso!",
+                                "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                        naoEncontrado = false;
+                        frame.getContentPane().removeAll();
+                        telaPrograma.renderizarPainelPrograma(frame, telaLogin, telaPrograma);
+                        telaPrograma.gambiarra(frame);
+                        break;
+                    }
+                }
+                if(naoEncontrado) JOptionPane.showMessageDialog(null, "Usuário ou senha inválidos!",
+                        "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
+        buttonSair.addActionListener(e -> System.exit(0));
+
 
         buttonCadastrarFuncionario.addActionListener(e -> {
             // Exibe diálogos para capturar as informações do funcionário
@@ -287,6 +323,10 @@ public class ControleModoGrafico {
     }
 
     private void atualizarDB(){
-
+        conector.getConnection();
+        funcionarios = conector.SelectFuncionarios();
+        pedidos = conector.SelectPedidos();
+        produtos = conector.SelectProdutos();
+        usuarios = conector.SelectLogin();
     }
 }

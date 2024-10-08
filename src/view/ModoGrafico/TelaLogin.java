@@ -122,8 +122,9 @@ import model.identificadores.Login;
         }
 
         public void configurarAcoes(JFrame frame, TelaLogin telaLogin, TelaPrograma telaPrograma) {
-            this.telaLogin = telaLogin;
+            this.telaLogin = this;
             this.telaPrograma = telaPrograma;
+            /*
             buttonEntrar.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -146,7 +147,7 @@ import model.identificadores.Login;
                 }
             });
 
-            buttonSair.addActionListener(e -> System.exit(0));
+            buttonSair.addActionListener(e -> System.exit(0));*/
 
             // Listener para o link "Esqueceu a senha?"
             linkEsqueceuSenha.addMouseListener(new MouseAdapter() {
@@ -243,6 +244,22 @@ import model.identificadores.Login;
 
         public void setButtonSair(JButton buttonSair) {
             this.buttonSair = buttonSair;
+        }
+
+        public JTextField getTextUsuario() {
+            return textUsuario;
+        }
+
+        public void setTextUsuario(JTextField textUsuario) {
+            this.textUsuario = textUsuario;
+        }
+
+        public JPasswordField getTextSenha() {
+            return textSenha;
+        }
+
+        public void setTextSenha(JPasswordField textSenha) {
+            this.textSenha = textSenha;
         }
 
         // Painel personalizado para aplicar o fundo degradê

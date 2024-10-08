@@ -48,6 +48,11 @@ public class TelaPrograma {
 
         gradientPanel.add(tabbedPane, BorderLayout.CENTER);
 
+
+
+    }
+
+    public void gambiarra(JFrame frame){
         frame.getContentPane().removeAll();
         frame.add(gradientPanel, BorderLayout.CENTER);
         frame.revalidate();
@@ -73,7 +78,7 @@ public class TelaPrograma {
 
         panel.add(Box.createVerticalGlue());
 
-        configurarEventosArquivo(frame, login, telaPrograma);
+//        configurarEventosArquivo(frame, login, telaPrograma);
 
         return panel;
     }
@@ -334,7 +339,7 @@ public class TelaPrograma {
         buttonVerificarPedido = new JButton("Verificar Disponibilidade");
         buttonRealizarPedido = new JButton("Realizar Pedido");
         buttonEncerrarPedido = new JButton("Encerrar Pedido");
-        buttonAlterarFuncionario = new JButton("Alterar Pedido");
+        buttonAlterarPedidos = new JButton("Alterar Pedido");
 
         buttonVerificarPedido.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttonRealizarPedido.setAlignmentX(Component.CENTER_ALIGNMENT);
