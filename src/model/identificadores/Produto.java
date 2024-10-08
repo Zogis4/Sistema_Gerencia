@@ -11,8 +11,8 @@ public class Produto implements IProdutos {
 
     @Override
     public void adicionarProduto(String nomeProduto, String idProduto, double preco, String categoria, String descricao) {
-        this.nome = nome;
-        this.id = id;
+        this.nome = nomeProduto;
+        this.id = idProduto;
         this.preco = preco;
         this.categoria = categoria;
         this.descricao = descricao;
@@ -68,7 +68,14 @@ public class Produto implements IProdutos {
         this.descricao = descricao;
     }
 
-    //public void adicionarProduto();
-	//public void alterarFuncionario();
-	//public void desligarFuncionario();
+    @Override
+    public String toString() {
+        return "[" +
+                "nome: " + nome + " | " +
+                ", id: " + id + " | " +
+                ", preco: " + preco +
+                ", categoria: " + categoria + " | " +
+                ", descricao: " + descricao + " | " +
+                ']';
+    }
 }

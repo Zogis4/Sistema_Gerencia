@@ -61,4 +61,9 @@ public class Funcionario implements IFuncionarios {
     public void setIdFuncionario(String idFuncionario) {
         this.idFuncionario = idFuncionario;
     }
+
+    @Override
+    public String toString() {
+        return "[Nome Funcionario: " + nomeFuncionario + " | Cargo: " + cargo + " | Ultimo acesso: " + ultimoAcesso + " | ID Funcionario: " + idFuncionario + "]";
+    }
 }

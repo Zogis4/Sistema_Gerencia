@@ -75,8 +75,14 @@ public class Pedido  implements IPedidos {
         this.descricao = descricao;
     }
 
-    //public void verificarDisponibilidade();
-	//public void realizarPedido();
-	//public void encerrarPedido();
-	//public void alterarPedido();
+    @Override
+    public String toString() {
+        return "[" +
+                "nomePedido: " + nomePedido + " | " +
+                ", idPedido: " + idPedido + " | " +
+                ", dataPedido: " + dataPedido + " | " +
+                ", dataEntrega: " + dataEntrega + " | " +
+                ", descricao: " + descricao + " | " +
+                ']';
+    }
 }
