@@ -61,16 +61,6 @@ public class ControleModoGrafico {
     private void setarBotoes() {
         JButton buttonEntrar = telaLogin.getButtonEntrar();
         JButton buttonSair = telaLogin.getButtonSair();
-        JButton buttonCadastrarFuncionario = telaPrograma.getButtonCadastrarFuncionario();
-        JButton buttonAlterarFuncionario = telaPrograma.getButtonAlterarFuncionario();
-        JButton buttonDesligarFuncionario = telaPrograma.getButtonDesligarFuncionario();
-        JButton buttonAdicionarProduto = telaPrograma.getButtonAdicionarProduto();
-        JButton buttonAlterarEstoque = telaPrograma.getButtonAlterarEstoque();
-        JButton buttonAlterarPreco = telaPrograma.getButtonAlterarPreco();
-        JButton buttonVerificarPedido = telaPrograma.getButtonVerificarPedido();
-        JButton buttonRealizarPedido = telaPrograma.getButtonRealizarPedido();
-        JButton buttonEncerrarPedido = telaPrograma.getButtonEncerrarPedido();
-        JButton buttonAlterarPedidos = telaPrograma.getButtonAlterarPedidos();
 
         buttonEntrar.addActionListener(e -> {
             JTextField textUsuario = telaLogin.getTextUsuario();
@@ -91,7 +81,7 @@ public class ControleModoGrafico {
                         frame.getContentPane().removeAll();
                         telaPrograma.renderizarPainelPrograma(frame, telaLogin, telaPrograma);
                         telaPrograma.gambiarra(frame);
-                        break;
+                        setarBotoes2();
                     }
                 }
                 if(naoEncontrado) JOptionPane.showMessageDialog(null, "Usuário ou senha inválidos!",
@@ -101,6 +91,56 @@ public class ControleModoGrafico {
 
         buttonSair.addActionListener(e -> System.exit(0));
 
+
+
+    }
+
+    private void setarBotoes2(){
+        JButton buttonVoltar = telaPrograma.getButtonVoltar();
+        JButton buttonSair = telaPrograma.getButtonSair();
+        JButton buttonCadastrarFuncionario = telaPrograma.getButtonCadastrarFuncionario();
+        JButton buttonAlterarFuncionario = telaPrograma.getButtonAlterarFuncionario();
+        JButton buttonDesligarFuncionario = telaPrograma.getButtonDesligarFuncionario();
+        JButton buttonAdicionarProduto = telaPrograma.getButtonAdicionarProduto();
+        JButton buttonAlterarEstoque = telaPrograma.getButtonAlterarEstoque();
+        JButton buttonAlterarPreco = telaPrograma.getButtonAlterarPreco();
+        JButton buttonVerificarPedido = telaPrograma.getButtonVerificarPedido();
+        JButton buttonRealizarPedido = telaPrograma.getButtonRealizarPedido();
+        JButton buttonEncerrarPedido = telaPrograma.getButtonEncerrarPedido();
+        JButton buttonAlterarPedidos = telaPrograma.getButtonAlterarPedidos();
+
+        buttonVoltar.addActionListener(e -> {
+            // Mensagem de feedback ao usuário
+            JOptionPane.showMessageDialog(frame, "Voltando ao menu principal...");
+
+            // Remove todos os componentes da tela atual
+            frame.getContentPane().removeAll();
+
+            // Renderiza a tela de login novamente
+//            JPanel painelLogin = login.renderizarPainelLogin(frame);
+//            frame.setContentPane(painelLogin);
+//            login.configurarAcoes(frame, login, telaPrograma); // Configura as ações da tela de login
+
+            // Ajusta o tamanho, a posição e o comportamento da janela
+            frame.setSize(700, 600);
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setLocationRelativeTo(null);
+
+            // Revalida e repinta o frame para garantir que a nova tela seja exibida corretamente
+            frame.revalidate();
+            frame.repaint();
+        });
+
+        // Listener para o botão "Sair"
+        buttonSair.addActionListener(e -> {
+            int confirm = JOptionPane.showConfirmDialog(frame, "Tem certeza de que deseja sair?",
+                    "Confirmação", JOptionPane.YES_NO_OPTION);
+
+            if (confirm == JOptionPane.YES_OPTION) {
+                frame.dispose(); // Fecha a janela atual
+                System.exit(0);  // Fecha o programa
+            }
+        });
 
         buttonCadastrarFuncionario.addActionListener(e -> {
             // Exibe diálogos para capturar as informações do funcionário
