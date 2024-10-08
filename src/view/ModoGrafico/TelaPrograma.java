@@ -1,7 +1,6 @@
 package view.ModoGrafico;
 
 import model.identificadores.Funcionario;
-import model.identificadores.Pedido;
 import model.identificadores.Produto;
 import javax.swing.*;
 import java.awt.*;
@@ -17,15 +16,15 @@ public class TelaPrograma {
     private JPanel pedidosPanel;
     private JButton buttonVoltar;
     private JButton buttonSair;
-    private JButton buttonCadastrar;
-    private JButton buttonAlterar;
-    private JButton buttonDesligar;
-    private JButton buttonAdicionar;
+    private JButton buttonCadastrarFuncionario;
+    private JButton buttonAlterarFuncionario;
+    private JButton buttonDesligarFuncionario;
+    private JButton buttonAdicionarProduto;
     private JButton buttonAlterarEstoque;
     private JButton buttonAlterarPreco;
-    private JButton buttonVerificar;
-    private JButton buttonRealizar;
-    private JButton buttonEncerrar;
+    private JButton buttonVerificarPedido;
+    private JButton buttonRealizarPedido;
+    private JButton buttonEncerrarPedido;
     private JButton buttonAlterarPedidos;
 
     public void renderizarPainelPrograma(JFrame frame, TelaLogin login, TelaPrograma telaPrograma) {
@@ -121,23 +120,23 @@ public class TelaPrograma {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.add(Box.createVerticalGlue());
 
-        buttonCadastrar = new JButton("Cadastrar Funcionário");
-        buttonAlterar = new JButton("Alterar Funcionário");
-        buttonDesligar = new JButton("Desligar Funcionário");
+        buttonCadastrarFuncionario = new JButton("Cadastrar Funcionário");
+        buttonAlterarFuncionario = new JButton("Alterar Funcionário");
+        buttonDesligarFuncionario = new JButton("Desligar Funcionário");
 
-        buttonCadastrar.setAlignmentX(Component.CENTER_ALIGNMENT);
-        buttonAlterar.setAlignmentX(Component.CENTER_ALIGNMENT);
-        buttonDesligar.setAlignmentX(Component.CENTER_ALIGNMENT);
+        buttonCadastrarFuncionario.setAlignmentX(Component.CENTER_ALIGNMENT);
+        buttonAlterarFuncionario.setAlignmentX(Component.CENTER_ALIGNMENT);
+        buttonDesligarFuncionario.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        panel.add(buttonCadastrar);
+        panel.add(buttonCadastrarFuncionario);
         panel.add(Box.createRigidArea(new Dimension(0, 50)));
-        panel.add(buttonAlterar);
+        panel.add(buttonAlterarFuncionario);
         panel.add(Box.createRigidArea(new Dimension(0, 50)));
-        panel.add(buttonDesligar);
+        panel.add(buttonDesligarFuncionario);
 
         panel.add(Box.createVerticalGlue());
 
-        configurarEventosFuncionario(frame);
+        //configurarEventosFuncionario(frame);
 
         return panel;
     }
@@ -145,7 +144,7 @@ public class TelaPrograma {
     @Deprecated
     private void configurarEventosFuncionario(JFrame frame) {
         // Listener para o botao "Cadastrar Funcionário"
-        buttonCadastrar.addActionListener(e -> {
+        buttonCadastrarFuncionario.addActionListener(e -> {
             // Exibe diálogos para capturar as informações do funcionário
             String nomeFuncionario = JOptionPane.showInputDialog(frame, "Digite o nome do funcionário:");
             String cargoFuncionario = JOptionPane.showInputDialog(frame, "Digite o cargo do funcionário:");
@@ -159,6 +158,7 @@ public class TelaPrograma {
                 Funcionario funcionario = new Funcionario();
                 funcionario.cadastrarFuncionario(nomeFuncionario, cargoFuncionario, "DataAtual", idFuncionario);
 
+
                 // Exibe mensagem de sucesso
                 JOptionPane.showMessageDialog(frame, "Funcionário cadastrado com sucesso!");
             } else {
@@ -168,7 +168,7 @@ public class TelaPrograma {
         });
 
         // Listener para o botão "Alterar Funcionário"
-        buttonAlterar.addActionListener(e -> {
+        buttonAlterarFuncionario.addActionListener(e -> {
             String idFuncionario = JOptionPane.showInputDialog(frame, "Digite o ID do funcionário a ser alterado:");
 
             if (idFuncionario != null && !idFuncionario.trim().isEmpty()) {
@@ -194,7 +194,7 @@ public class TelaPrograma {
         });
 
         // Listener para o botão "Desligar Funcionário"
-        buttonDesligar.addActionListener(e -> {
+        buttonDesligarFuncionario.addActionListener(e -> {
             String idFuncionario = JOptionPane.showInputDialog(frame, "Digite o ID do funcionário a ser desligado:");
 
             if (idFuncionario != null && !idFuncionario.trim().isEmpty()) {
@@ -223,15 +223,15 @@ public class TelaPrograma {
         panel.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(Box.createVerticalGlue());
 
-        buttonAdicionar = new JButton("Adicionar Produto");
+        buttonAdicionarProduto = new JButton("Adicionar Produto");
         buttonAlterarEstoque = new JButton("Alterar Estoque");
         buttonAlterarPreco = new JButton("Alterar Preço");
 
-        buttonAdicionar.setAlignmentX(Component.CENTER_ALIGNMENT);
+        buttonAdicionarProduto.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttonAlterarEstoque.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttonAlterarPreco.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        panel.add(buttonAdicionar);
+        panel.add(buttonAdicionarProduto);
         panel.add(Box.createRigidArea(new Dimension(0, 50)));
         panel.add(buttonAlterarEstoque);
         panel.add(Box.createRigidArea(new Dimension(0, 50)));
@@ -239,7 +239,7 @@ public class TelaPrograma {
 
         panel.add(Box.createVerticalGlue());
 
-        configurarEventosProduto(frame, buttonAdicionar, buttonAlterarEstoque, buttonAlterarPreco);
+        //configurarEventosProduto(frame, buttonAdicionarProduto, buttonAlterarEstoque, buttonAlterarPreco);
 
         return panel;
     }
@@ -331,27 +331,27 @@ public class TelaPrograma {
         panel.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(Box.createVerticalGlue());
 
-        buttonVerificar = new JButton("Verificar Disponibilidade");
-        buttonRealizar = new JButton("Realizar Pedido");
-        buttonEncerrar = new JButton("Encerrar Pedido");
-        buttonAlterar = new JButton("Alterar Pedido");
+        buttonVerificarPedido = new JButton("Verificar Disponibilidade");
+        buttonRealizarPedido = new JButton("Realizar Pedido");
+        buttonEncerrarPedido = new JButton("Encerrar Pedido");
+        buttonAlterarFuncionario = new JButton("Alterar Pedido");
 
-        buttonVerificar.setAlignmentX(Component.CENTER_ALIGNMENT);
-        buttonRealizar.setAlignmentX(Component.CENTER_ALIGNMENT);
-        buttonEncerrar.setAlignmentX(Component.CENTER_ALIGNMENT);
+        buttonVerificarPedido.setAlignmentX(Component.CENTER_ALIGNMENT);
+        buttonRealizarPedido.setAlignmentX(Component.CENTER_ALIGNMENT);
+        buttonEncerrarPedido.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttonAlterarPedidos.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        panel.add(buttonVerificar);
+        panel.add(buttonVerificarPedido);
         panel.add(Box.createRigidArea(new Dimension(0, 50)));
-        panel.add(buttonRealizar);
+        panel.add(buttonRealizarPedido);
         panel.add(Box.createRigidArea(new Dimension(0, 50)));
-        panel.add(buttonEncerrar);
+        panel.add(buttonEncerrarPedido);
         panel.add(Box.createRigidArea(new Dimension(0, 50)));
         panel.add(buttonAlterarPedidos);
 
         panel.add(Box.createVerticalGlue());
 
-        configurarEventosPedidos(buttonVerificar, buttonRealizar, buttonEncerrar, buttonAlterar);
+        //configurarEventosPedidos(buttonVerificarPedido, buttonRealizarPedido, buttonEncerrarPedido, buttonAlterarFuncionario);
 
         return panel;
     }
@@ -454,36 +454,36 @@ public class TelaPrograma {
         this.buttonSair = buttonSair;
     }
 
-    public JButton getButtonCadastrar() {
-        return buttonCadastrar;
+    public JButton getButtonCadastrarFuncionario() {
+        return buttonCadastrarFuncionario;
     }
 
-    public void setButtonCadastrar(JButton buttonCadastrar) {
-        this.buttonCadastrar = buttonCadastrar;
+    public void setButtonCadastrarFuncionario(JButton buttonCadastrarFuncionario) {
+        this.buttonCadastrarFuncionario = buttonCadastrarFuncionario;
     }
 
-    public JButton getButtonAlterar() {
-        return buttonAlterar;
+    public JButton getButtonAlterarFuncionario() {
+        return buttonAlterarFuncionario;
     }
 
-    public void setButtonAlterar(JButton buttonAlterar) {
-        this.buttonAlterar = buttonAlterar;
+    public void setButtonAlterarFuncionario(JButton buttonAlterarFuncionario) {
+        this.buttonAlterarFuncionario = buttonAlterarFuncionario;
     }
 
-    public JButton getButtonDesligar() {
-        return buttonDesligar;
+    public JButton getButtonDesligarFuncionario() {
+        return buttonDesligarFuncionario;
     }
 
-    public void setButtonDesligar(JButton buttonDesligar) {
-        this.buttonDesligar = buttonDesligar;
+    public void setButtonDesligarFuncionario(JButton buttonDesligarFuncionario) {
+        this.buttonDesligarFuncionario = buttonDesligarFuncionario;
     }
 
-    public JButton getButtonAdicionar() {
-        return buttonAdicionar;
+    public JButton getButtonAdicionarProduto() {
+        return buttonAdicionarProduto;
     }
 
-    public void setButtonAdicionar(JButton buttonAdicionar) {
-        this.buttonAdicionar = buttonAdicionar;
+    public void setButtonAdicionarProduto(JButton buttonAdicionarProduto) {
+        this.buttonAdicionarProduto = buttonAdicionarProduto;
     }
 
     public JButton getButtonAlterarEstoque() {
@@ -502,28 +502,28 @@ public class TelaPrograma {
         this.buttonAlterarPreco = buttonAlterarPreco;
     }
 
-    public JButton getButtonVerificar() {
-        return buttonVerificar;
+    public JButton getButtonVerificarPedido() {
+        return buttonVerificarPedido;
     }
 
-    public void setButtonVerificar(JButton buttonVerificar) {
-        this.buttonVerificar = buttonVerificar;
+    public void setButtonVerificarPedido(JButton buttonVerificarPedido) {
+        this.buttonVerificarPedido = buttonVerificarPedido;
     }
 
-    public JButton getButtonRealizar() {
-        return buttonRealizar;
+    public JButton getButtonRealizarPedido() {
+        return buttonRealizarPedido;
     }
 
-    public void setButtonRealizar(JButton buttonRealizar) {
-        this.buttonRealizar = buttonRealizar;
+    public void setButtonRealizarPedido(JButton buttonRealizarPedido) {
+        this.buttonRealizarPedido = buttonRealizarPedido;
     }
 
-    public JButton getButtonEncerrar() {
-        return buttonEncerrar;
+    public JButton getButtonEncerrarPedido() {
+        return buttonEncerrarPedido;
     }
 
-    public void setButtonEncerrar(JButton buttonEncerrar) {
-        this.buttonEncerrar = buttonEncerrar;
+    public void setButtonEncerrarPedido(JButton buttonEncerrarPedido) {
+        this.buttonEncerrarPedido = buttonEncerrarPedido;
     }
 
     public JButton getButtonAlterarPedidos() {
