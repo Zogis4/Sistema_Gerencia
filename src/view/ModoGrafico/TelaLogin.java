@@ -229,6 +229,22 @@ import model.identificadores.Login;
             this.telaPrograma = telaPrograma;
         }
 
+        public JButton getButtonEntrar() {
+            return buttonEntrar;
+        }
+
+        public void setButtonEntrar(JButton buttonEntrar) {
+            this.buttonEntrar = buttonEntrar;
+        }
+
+        public JButton getButtonSair() {
+            return buttonSair;
+        }
+
+        public void setButtonSair(JButton buttonSair) {
+            this.buttonSair = buttonSair;
+        }
+
         // Painel personalizado para aplicar o fundo degradê
         private class GradientPanel extends JPanel {
             @Override
