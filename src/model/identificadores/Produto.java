@@ -8,14 +8,16 @@ public class Produto implements IProdutos {
     private double preco;
     private String categoria = "";
     private String descricao = "";
+    private double desconto;
 
     @Override
-    public void adicionarProduto(String nomeProduto, String idProduto, double preco, String categoria, String descricao) {
+    public void adicionarProduto(String nomeProduto, String idProduto, double preco, String categoria, String descricao, double desconto) {
         this.nome = nomeProduto;
         this.id = idProduto;
         this.preco = preco;
         this.categoria = categoria;
         this.descricao = descricao;
+        this.desconto = desconto;
     }
 
     @Override

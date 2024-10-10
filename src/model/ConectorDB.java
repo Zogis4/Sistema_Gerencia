@@ -99,10 +99,10 @@ public class ConectorDB {
                 String Produtos_preco = rs.getString("Produtos_preco");
                 String Produtos_categoria = rs.getString("Produtos_categoria");
                 String Produtos_descricao = rs.getString("Produtos_descricao");
-
+                String Produtos_desconto = rs.getString("Produtos_desconto");
                 double preco = Double.parseDouble(Produtos_preco);
-
-                produto.adicionarProduto(Produtos_nome,Produtos_id,preco,Produtos_categoria,Produtos_descricao);
+                double desconto = Double.parseDouble(Produtos_desconto);
+                produto.adicionarProduto(Produtos_nome,Produtos_id,preco,Produtos_categoria,Produtos_descricao,desconto);
                 Produto_Dados.add(produto);
                 System.out.println(produto.toString());
             }

@@ -259,17 +259,17 @@ public class TelaPrograma {
             String precoProdutoStr = JOptionPane.showInputDialog(frame, "Digite o preço do produto:");
             String categoriaProduto = JOptionPane.showInputDialog(frame, "Digite a categoria do produto:");
             String descricaoProduto = JOptionPane.showInputDialog(frame, "Digite a descrição do produto:");
-
+            String descontoProdutoStr = JOptionPane.showInputDialog(frame, "Digite o desconto do produto:");
             // Validação e conversão do preço
             try {
                 double precoProduto = Double.parseDouble(precoProdutoStr);
-
+                double descontoProduto = Double.parseDouble(descontoProdutoStr);
                 if (!nomeProduto.trim().isEmpty() && !idProduto.trim().isEmpty() && precoProduto >= 0
                         && !categoriaProduto.trim().isEmpty() && !descricaoProduto.trim().isEmpty()) {
 
                     // Cria e adiciona o produto
                     Produto produto = new Produto();
-                    produto.adicionarProduto(nomeProduto, idProduto, precoProduto, categoriaProduto, descricaoProduto);
+                    produto.adicionarProduto(nomeProduto, idProduto, precoProduto, categoriaProduto, descricaoProduto, descontoProduto);
 
                     JOptionPane.showMessageDialog(frame, "Produto adicionado com sucesso!");
                 } else {

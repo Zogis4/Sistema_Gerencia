@@ -13,7 +13,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class ControleModoGrafico {
+public class ControleModoGrafico{
     private ArrayList<Funcionario> funcionarios = new ArrayList<>();
     private ArrayList<Pedido> pedidos = new ArrayList<>();
     private ArrayList<Produto> produtos = new ArrayList<>();
@@ -57,7 +57,7 @@ public class ControleModoGrafico {
         
 
     }
-
+    
     private void setarBotoes() {
         JButton buttonEntrar = telaLogin.getButtonEntrar();
         JButton buttonSair = telaLogin.getButtonSair();
@@ -217,17 +217,17 @@ public class ControleModoGrafico {
             String precoProdutoStr = JOptionPane.showInputDialog(frame, "Digite o preço do produto:");
             String categoriaProduto = JOptionPane.showInputDialog(frame, "Digite a categoria do produto:");
             String descricaoProduto = JOptionPane.showInputDialog(frame, "Digite a descrição do produto:");
-
+            String descontoProdutoStr = JOptionPane.showInputDialog(frame, "Digite o desconto do produto:");
             // Validação e conversão do preço
             try {
                 double precoProduto = Double.parseDouble(precoProdutoStr);
-
+                double descontoProduto = Double.parseDouble(descontoProdutoStr);
                 if (!nomeProduto.trim().isEmpty() && !idProduto.trim().isEmpty() && precoProduto >= 0
                         && !categoriaProduto.trim().isEmpty() && !descricaoProduto.trim().isEmpty()) {
 
                     // Cria e adiciona o produto
                     Produto produto = new Produto();
-                    produto.adicionarProduto(nomeProduto, idProduto, precoProduto, categoriaProduto, descricaoProduto);
+                    produto.adicionarProduto(nomeProduto, idProduto, precoProduto, categoriaProduto, descricaoProduto, descontoProduto);
                     produtos.add(produto);
 
                     JOptionPane.showMessageDialog(frame, "Produto adicionado com sucesso!");
