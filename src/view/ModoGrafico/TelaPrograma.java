@@ -5,7 +5,7 @@ import model.identificadores.Produto;
 import javax.swing.*;
 import java.awt.*;
 
-public class TelaPrograma {
+public class TelaPrograma extends JPanel{
 
     private ImageIcon logoIcon;
     private JPanel gradientPanel;
@@ -26,6 +26,41 @@ public class TelaPrograma {
     private JButton buttonRealizarPedido;
     private JButton buttonEncerrarPedido;
     private JButton buttonAlterarPedidos;
+
+
+    public TelaPrograma(){
+        renderizarPainelPrograma();
+    }
+
+    public JPanel renderizarPainelPrograma(){
+        logoIcon = new ImageIcon("logoEmpresa.png");
+
+        gradientPanel = new JPanel();
+        gradientPanel.setLayout(new BorderLayout());
+        gradientPanel.setBounds(0,0,700,600);
+
+        tabbedPane = new JTabbedPane();
+        tabbedPane.setLayout(null);
+        tabbedPane.setBounds(0,0,700,600);
+        tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
+
+        arquivoPanel = createArquivoPanel();
+        funcionariosPanel = createFuncionariosPanel();
+        produtosPanel = createProdutosPanel();
+        pedidosPanel = createPedidosPanel();
+
+        tabbedPane.addTab("Arquivos", arquivoPanel);
+        tabbedPane.addTab("Funcionários", funcionariosPanel);
+        tabbedPane.addTab("Produtos", produtosPanel);
+        tabbedPane.addTab("Pedidos", pedidosPanel);
+
+        System.out.println(tabbedPane.getHeight() + " " + tabbedPane.getWidth());
+
+        gradientPanel.add(tabbedPane, BorderLayout.CENTER);
+        this.add(gradientPanel, BorderLayout.CENTER);
+
+        return this;
+    }
 
     public void renderizarPainelPrograma(JFrame frame, TelaLogin login, TelaPrograma telaPrograma) {
         logoIcon = new ImageIcon("logoEmpresa.png");
@@ -59,6 +94,30 @@ public class TelaPrograma {
         frame.repaint();
     }
 
+    private JPanel createArquivoPanel(){
+        WatermarkPanel panel = new WatermarkPanel(logoIcon);
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setBounds(0,0,700,600);
+
+        panel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(Box.createVerticalGlue());
+
+        buttonVoltar = new JButton("Voltar ao Menu");
+        buttonSair = new JButton("Sair");
+
+        buttonVoltar.setAlignmentX(Component.CENTER_ALIGNMENT);
+        buttonSair.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        panel.add(buttonVoltar);
+        panel.add(Box.createRigidArea(new Dimension(0, 50)));
+        panel.add(buttonSair);
+
+        panel.add(Box.createVerticalGlue());
+
+        return panel;
+    }
+
+    @Deprecated
     private JPanel createArquivoPanel(JFrame frame, TelaLogin login, TelaPrograma telaPrograma, ImageIcon logoIcon) {
         WatermarkPanel panel = new WatermarkPanel(logoIcon); // Marca d'água no fundo
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -83,6 +142,7 @@ public class TelaPrograma {
         return panel;
     }
 
+    @Deprecated
     private void configurarEventosArquivo(JFrame frame, TelaLogin login, TelaPrograma telaPrograma) {
         // Listener para o botão "Voltar ao Menu"
         buttonVoltar.addActionListener(e -> {
@@ -119,6 +179,30 @@ public class TelaPrograma {
         });
     }
 
+    private JPanel createFuncionariosPanel(){
+        WatermarkPanel panel = new WatermarkPanel(logoIcon); // Marca d'água no fundo
+
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.add(Box.createVerticalGlue());
+
+        buttonCadastrarFuncionario = new JButton("Cadastrar Funcionário");
+        buttonAlterarFuncionario = new JButton("Alterar Funcionário");
+        buttonDesligarFuncionario = new JButton("Desligar Funcionário");
+
+        buttonCadastrarFuncionario.setAlignmentX(Component.CENTER_ALIGNMENT);
+        buttonAlterarFuncionario.setAlignmentX(Component.CENTER_ALIGNMENT);
+        buttonDesligarFuncionario.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        panel.add(buttonCadastrarFuncionario);
+        panel.add(Box.createRigidArea(new Dimension(0, 50)));
+        panel.add(buttonAlterarFuncionario);
+        panel.add(Box.createRigidArea(new Dimension(0, 50)));
+        panel.add(buttonDesligarFuncionario);
+
+        return panel;
+    }
+
+    @Deprecated
     private JPanel createFuncionariosPanel(JFrame frame, ImageIcon logoIcon) {
         WatermarkPanel panel = new WatermarkPanel(logoIcon); // Marca d'água no fundo
 
@@ -220,6 +304,34 @@ public class TelaPrograma {
         });
     }
 
+    private JPanel createProdutosPanel(){
+        WatermarkPanel panel = new WatermarkPanel(logoIcon); // Marca d'água no fundo
+
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+        panel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(Box.createVerticalGlue());
+
+        buttonAdicionarProduto = new JButton("Adicionar Produto");
+        buttonAlterarEstoque = new JButton("Alterar Estoque");
+        buttonAlterarPreco = new JButton("Alterar Preço");
+
+        buttonAdicionarProduto.setAlignmentX(Component.CENTER_ALIGNMENT);
+        buttonAlterarEstoque.setAlignmentX(Component.CENTER_ALIGNMENT);
+        buttonAlterarPreco.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        panel.add(buttonAdicionarProduto);
+        panel.add(Box.createRigidArea(new Dimension(0, 50)));
+        panel.add(buttonAlterarEstoque);
+        panel.add(Box.createRigidArea(new Dimension(0, 50)));
+        panel.add(buttonAlterarPreco);
+
+        panel.add(Box.createVerticalGlue());
+
+        return panel;
+    }
+
+    @Deprecated
     private JPanel createProdutosPanel(JFrame frame, ImageIcon logoIcon) {
         WatermarkPanel panel = new WatermarkPanel(logoIcon); // Marca d'água no fundo
 
@@ -328,6 +440,38 @@ public class TelaPrograma {
         });
     }
 
+    private JPanel createPedidosPanel(){
+        WatermarkPanel panel = new WatermarkPanel(logoIcon); // Marca d'água no fundo
+
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+        panel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(Box.createVerticalGlue());
+
+        buttonVerificarPedido = new JButton("Verificar Disponibilidade");
+        buttonRealizarPedido = new JButton("Realizar Pedido");
+        buttonEncerrarPedido = new JButton("Encerrar Pedido");
+        buttonAlterarPedidos = new JButton("Alterar Pedido");
+
+        buttonVerificarPedido.setAlignmentX(Component.CENTER_ALIGNMENT);
+        buttonRealizarPedido.setAlignmentX(Component.CENTER_ALIGNMENT);
+        buttonEncerrarPedido.setAlignmentX(Component.CENTER_ALIGNMENT);
+        buttonAlterarPedidos.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        panel.add(buttonVerificarPedido);
+        panel.add(Box.createRigidArea(new Dimension(0, 50)));
+        panel.add(buttonRealizarPedido);
+        panel.add(Box.createRigidArea(new Dimension(0, 50)));
+        panel.add(buttonEncerrarPedido);
+        panel.add(Box.createRigidArea(new Dimension(0, 50)));
+        panel.add(buttonAlterarPedidos);
+
+        panel.add(Box.createVerticalGlue());
+
+        return panel;
+    }
+
+    @Deprecated
     private JPanel createPedidosPanel(JFrame frame, ImageIcon logoIcon) {
         WatermarkPanel panel = new WatermarkPanel(logoIcon); // Marca d'água no fundo
 
@@ -440,8 +584,57 @@ public class TelaPrograma {
         });
     }
 
-    //getters e setters
 
+
+    // Implementação do painel com marca d'água
+    class WatermarkPanel extends JPanel {
+        private final ImageIcon watermark;
+        private final int margin = 40; // Margem entre as imagens
+
+        public WatermarkPanel(ImageIcon watermark) {
+            this.watermark = watermark;
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            if (watermark != null) {
+                Graphics2D g2d = (Graphics2D) g.create();
+                AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.1f);
+                g2d.setComposite(alpha);
+
+                int width = getWidth();
+                int height = getHeight();
+                int imageWidth = watermark.getIconWidth();
+                int imageHeight = watermark.getIconHeight();
+
+                // Ângulo de rotação em radianos (45 graus)
+                double angle = Math.toRadians(45);
+
+                // Preenche o fundo com a marca d'água repetida na diagonal e rotacionada
+                for (int y = -imageHeight * 2; y < height + imageHeight * 2; y += imageHeight + margin) {
+                    for (int x = -imageWidth * 2; x < width + imageWidth * 2; x += imageWidth + margin) {
+                        // Criar uma nova instância do Graphics2D para cada imagem
+                        Graphics2D g2dImage = (Graphics2D) g2d.create();
+
+                        // Move o ponto de origem para a posição da imagem
+                        g2dImage.translate(x + imageWidth, y + imageHeight);
+                        // Rotaciona a imagem em torno do seu centro
+                        g2dImage.rotate(angle);
+
+                        // Desenha a imagem rotacionada
+                        g2dImage.drawImage(watermark.getImage(), -imageWidth / 2, -imageHeight / 2, this);
+
+                        // Libera o contexto gráfico temporário
+                        g2dImage.dispose();
+                    }
+                }
+                g2d.dispose(); // Libera o contexto gráfico original
+            }
+        }
+    }
+
+    //getters e setters
 
     public JButton getButtonVoltar() {
         return buttonVoltar;
@@ -537,54 +730,6 @@ public class TelaPrograma {
 
     public void setButtonAlterarPedidos(JButton buttonAlterarPedidos) {
         this.buttonAlterarPedidos = buttonAlterarPedidos;
-    }
-
-    // Implementação do painel com marca d'água
-    class WatermarkPanel extends JPanel {
-        private final ImageIcon watermark;
-        private final int margin = 40; // Margem entre as imagens
-
-        public WatermarkPanel(ImageIcon watermark) {
-            this.watermark = watermark;
-        }
-
-        @Override
-        protected void paintComponent(Graphics g) {
-            super.paintComponent(g);
-            if (watermark != null) {
-                Graphics2D g2d = (Graphics2D) g.create();
-                AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.1f);
-                g2d.setComposite(alpha);
-
-                int width = getWidth();
-                int height = getHeight();
-                int imageWidth = watermark.getIconWidth();
-                int imageHeight = watermark.getIconHeight();
-
-                // Ângulo de rotação em radianos (45 graus)
-                double angle = Math.toRadians(45);
-
-                // Preenche o fundo com a marca d'água repetida na diagonal e rotacionada
-                for (int y = -imageHeight * 2; y < height + imageHeight * 2; y += imageHeight + margin) {
-                    for (int x = -imageWidth * 2; x < width + imageWidth * 2; x += imageWidth + margin) {
-                        // Criar uma nova instância do Graphics2D para cada imagem
-                        Graphics2D g2dImage = (Graphics2D) g2d.create();
-
-                        // Move o ponto de origem para a posição da imagem
-                        g2dImage.translate(x + imageWidth, y + imageHeight);
-                        // Rotaciona a imagem em torno do seu centro
-                        g2dImage.rotate(angle);
-
-                        // Desenha a imagem rotacionada
-                        g2dImage.drawImage(watermark.getImage(), -imageWidth / 2, -imageHeight / 2, this);
-
-                        // Libera o contexto gráfico temporário
-                        g2dImage.dispose();
-                    }
-                }
-                g2d.dispose(); // Libera o contexto gráfico original
-            }
-        }
     }
 }
 

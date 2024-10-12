@@ -16,16 +16,67 @@ import model.identificadores.Login;
         private JButton buttonEntrar, buttonSair;
         private JCheckBox checkBoxLembrar;
         private JLabel linkEsqueceuSenha;
-        private JFrame frame;
         private TelaLogin telaLogin;
         private TelaPrograma telaPrograma;
 
-        // Instância da classe Login com um usuário padrão
-        public Login login;
+        public TelaLogin(){
+            renderizarPainelLoginTeste();
+        }
+
+        public void renderizarPainelLoginTeste(){
+            this.setLayout(new BorderLayout());
+
+            JLabel logo = new JLabel(new ImageIcon("logoEmpresa.png"), SwingConstants.CENTER);
+            logo.setForeground(Color.WHITE);
+            logo.setBorder(new EmptyBorder(0, 0, 50, 0));
+
+            JLabel nomeCompania = new JLabel("Sistema de Gerenciamento de Inventário", SwingConstants.CENTER);
+            nomeCompania.setFont(new Font("Arial", Font.BOLD, 18));
+            nomeCompania.setForeground(Color.BLACK);
+
+            JPanel panel = new GradientPanel();
+            panel.setLayout(new GridBagLayout());
+            panel.setBorder(new EmptyBorder(20, 20, 20, 20));
+
+            GridBagConstraints constraints = new GridBagConstraints();
+            constraints.insets = new Insets(10, 10, 10, 10);
+            constraints.fill = GridBagConstraints.HORIZONTAL;
+
+            adicionarComponentesLogin(panel, constraints, logo, nomeCompania);
+
+            this.add(panel, BorderLayout.CENTER);
+
+        }
+
+        public JPanel renderizarPainelLogin(){
+            JPanel painel = new JPanel();
+            painel.setLayout(new BorderLayout());
+
+
+            JLabel logo = new JLabel(new ImageIcon("logoEmpresa.png"), SwingConstants.CENTER);
+            logo.setForeground(Color.WHITE);
+            logo.setBorder(new EmptyBorder(0, 0, 50, 0));
+
+            JLabel nomeCompania = new JLabel("Sistema de Gerenciamento de Inventário", SwingConstants.CENTER);
+            nomeCompania.setFont(new Font("Arial", Font.BOLD, 18));
+            nomeCompania.setForeground(Color.BLACK);
+
+            JPanel panel = new GradientPanel();
+            panel.setLayout(new GridBagLayout());
+            panel.setBorder(new EmptyBorder(20, 20, 20, 20));
+
+            GridBagConstraints constraints = new GridBagConstraints();
+            constraints.insets = new Insets(10, 10, 10, 10);
+            constraints.fill = GridBagConstraints.HORIZONTAL;
+
+            adicionarComponentesLogin(panel, constraints, logo, nomeCompania);
+
+            painel.add(panel, BorderLayout.CENTER);
+
+            return painel;
+        }
 
         public JPanel renderizarPainelLogin(JFrame frame) {
-            this.frame = frame;
-            this.login = new Login("admin", "123", "1");
 
             JPanel painel = new JPanel();
             painel.setLayout(new BorderLayout());
