@@ -197,6 +197,8 @@ public class TelaPrograma extends JPanel{
         panel.add(Box.createRigidArea(new Dimension(0, 50)));
         panel.add(buttonDesligarFuncionario);
 
+        panel.add(Box.createVerticalGlue());
+
         return panel;
     }
 
