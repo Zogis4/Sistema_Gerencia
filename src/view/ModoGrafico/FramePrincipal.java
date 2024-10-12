@@ -43,7 +43,7 @@ public class FramePrincipal {
         painelPrincipal.add(painelPrograma, JLayeredPane.DEFAULT_LAYER);
         painelPrincipal.setBounds(0,0,700,600);
         painelPrincipal.setVisible(true);
-//        painelPrincipal.add(painelLogin, JLayeredPane.PALETTE_LAYER);
+        painelPrincipal.add(painelLogin, JLayeredPane.PALETTE_LAYER);
 
         frame.setSize(700, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

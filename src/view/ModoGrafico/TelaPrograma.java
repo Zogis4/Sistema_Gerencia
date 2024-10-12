@@ -37,11 +37,8 @@ public class TelaPrograma extends JPanel{
 
         gradientPanel = new JPanel();
         gradientPanel.setLayout(new BorderLayout());
-        gradientPanel.setBounds(0,0,700,600);
 
         tabbedPane = new JTabbedPane();
-        tabbedPane.setLayout(null);
-        tabbedPane.setBounds(0,0,700,600);
         tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 
         arquivoPanel = createArquivoPanel();
@@ -57,6 +54,7 @@ public class TelaPrograma extends JPanel{
         System.out.println(tabbedPane.getHeight() + " " + tabbedPane.getWidth());
 
         gradientPanel.add(tabbedPane, BorderLayout.CENTER);
+        this.setLayout(new BorderLayout());
         this.add(gradientPanel, BorderLayout.CENTER);
 
         return this;
