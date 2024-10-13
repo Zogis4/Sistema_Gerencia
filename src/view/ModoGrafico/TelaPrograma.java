@@ -4,6 +4,7 @@ import model.identificadores.Funcionario;
 import model.identificadores.Produto;
 import javax.swing.*;
 import java.awt.*;
+import java.util.Vector;
 
 public class TelaPrograma extends JPanel{
 
@@ -584,6 +585,23 @@ public class TelaPrograma extends JPanel{
         });
     }
 
+    public JPanel createTestePanel(JScrollPane scrollPane){
+        WatermarkPanel panel = new WatermarkPanel(logoIcon);
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setBounds(0,0,700,600);
+
+        panel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(Box.createVerticalGlue());
+
+        panel.add(scrollPane, BorderLayout.CENTER);
+
+        return panel;
+    }
+
+    public JTable atualizarTabelaFuncionarios(Vector<Vector<Object>> vectorDados, Vector<String> vectorNomeColunas){
+        return new JTable(vectorDados, vectorNomeColunas);
+    }
+
 
 
     // Implementação do painel com marca d'água
@@ -730,6 +748,10 @@ public class TelaPrograma extends JPanel{
 
     public void setButtonAlterarPedidos(JButton buttonAlterarPedidos) {
         this.buttonAlterarPedidos = buttonAlterarPedidos;
+    }
+
+    public JTabbedPane getTabbedPane() {
+        return tabbedPane;
     }
 }
 

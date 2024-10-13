@@ -1,9 +1,6 @@
 package model;
 
-import model.identificadores.Funcionario;
-import model.identificadores.Login;
-import model.identificadores.Pedido;
-import model.identificadores.Produto;
+import model.identificadores.*;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Vector;
 
 
 public class ConectorDB {
@@ -137,6 +135,61 @@ public class ConectorDB {
             e.printStackTrace();
         }
         return Pedido_Dados;
+    }
+
+    public String describeTeste(){
+        String query = "describe `gestão-produtos`.`login`;";
+        try{
+            PreparedStatement stmt = connection.prepareCall(query);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                String field = rs.getString("Field");
+                String type = rs.getString("Type");
+
+                System.out.println("Field: " + field + ", Type: " + type);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public RetornoDescribe testeTabela(){
+        Vector<Vector<Object>> vectorDados = new Vector<>();
+        Vector<String> vectorNomeColunas = new Vector<>();
+        String query = "describe `gestão-produtos`.`Funcionarios`;";
+
+        try{
+            PreparedStatement stmt = connection.prepareCall(query);
+            ResultSet rs = stmt.executeQuery();
+
+            ArrayList<String> temp = new ArrayList<>();
+
+            //pega dinamicamente todos os campos que serão escolhidos
+            while (rs.next()) {
+                temp.add(rs.getString("Field"));
+            }
+
+            vectorNomeColunas = new Vector<>(temp);
+
+            query = "select * from `gestão-produtos`.`Funcionarios`;";
+            stmt = connection.prepareCall(query);
+            rs = stmt.executeQuery();
+
+            // adiciona os dados de cada coluna 1 por 1 e passa pra prox coluna
+            while(rs.next()){
+                Vector<Object> vectorColuna = new Vector<>();
+                for (String col: temp){
+                    vectorColuna.add(rs.getObject(col));
+                }
+                vectorDados.add(vectorColuna);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return new RetornoDescribe(vectorDados,vectorNomeColunas);
     }
    /*
    public static ArrayList<Empresa> InsertEmpresa(){

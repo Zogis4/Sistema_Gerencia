@@ -1,9 +1,11 @@
 package view.ModoGrafico;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import model.identificadores.RetornoDescribe;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Vector;
 
 public class FramePrincipal {
     private JFrame frame;
@@ -94,6 +96,20 @@ public class FramePrincipal {
         ajuda.addActionListener(e ->
                 JOptionPane.showMessageDialog(null, "Sistema de Gerenciamento de Inventário\n" +
                         "Versão 1.0", "Sobre", JOptionPane.INFORMATION_MESSAGE));
+    }
+
+    public void testeTabela(RetornoDescribe retorno){
+        JTabbedPane tabbedPane = painelPrograma.getTabbedPane();
+        JTable tabela = painelPrograma.atualizarTabelaFuncionarios(retorno.vectorDados,retorno.vectorNomeColunas);
+        tabela.setShowGrid(true);
+        tabela.setGridColor(Color.gray);
+        tabela.setShowHorizontalLines(true);
+        tabela.setShowVerticalLines(true);
+        JScrollPane scrollPane = new JScrollPane(tabela);
+        JPanel painelTeste = painelPrograma.createTestePanel(scrollPane);
+        tabbedPane.addTab("Teste", painelTeste);
+        tabbedPane.revalidate();
+        tabbedPane.repaint();
     }
 
     //getters
