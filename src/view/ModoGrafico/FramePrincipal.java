@@ -1,10 +1,15 @@
 package view.ModoGrafico;
 
+import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import model.identificadores.RetornoDescribe;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.JTableHeader;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.util.Vector;
 
 public class FramePrincipal {
@@ -19,6 +24,13 @@ public class FramePrincipal {
             UIManager.setLookAndFeel(new FlatMacLightLaf());
             UIManager.put("TabbedPane.background", new Color(74, 143, 211));
             UIManager.put("Panel.background", new Color(124, 173, 223));
+
+            UIManager.put("Table.rowHeight", 25); // Altura das linhas
+            UIManager.put("Table.intercellSpacing", new Dimension(3, 3)); // Espaço entre células
+            UIManager.put("Table.selectionInsets", new Insets(1, 1, 1, 1)); // Margens da seleção
+            UIManager.put("Table.selectionArc", 10); // Arredondamento da seleção
+            UIManager.put("Table.cellMargins", new Insets(5, 5, 5, 5));
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -101,16 +113,94 @@ public class FramePrincipal {
     public void testeTabela(RetornoDescribe retorno){
         JTabbedPane tabbedPane = painelPrograma.getTabbedPane();
         JTable tabela = painelPrograma.atualizarTabelaFuncionarios(retorno.vectorDados,retorno.vectorNomeColunas);
+
+        tabela.putClientProperty("JTable.cellRenderer", true);
+        tabela.putClientProperty("JTable.alternateRowColor", true);
+
+        tabela.putClientProperty(FlatClientProperties.COMPONENT_ROUND_RECT, true); // Bordas arredondadas
+        tabela.putClientProperty(FlatClientProperties.SCROLL_PANE_SMOOTH_SCROLLING, true); // Habilita rolagem suave
+        tabela.putClientProperty(FlatClientProperties.SCROLL_BAR_SHOW_BUTTONS, true); // Botões visíveis nas barras de rolagem
+        tabela.putClientProperty(FlatClientProperties.COMPONENT_ROUND_RECT, true); // Habilita bordas arredondadas
+        //tabela.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS); // Redimensionamento automático
+
+        // Ajuste de largura e redimensionamento automático
+        //tabela.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        //tabela.getColumnModel().getColumn(0).setPreferredWidth(100);  // Exemplo de largura inicial
+
+        // Estilo de seleção
+        tabela.setSelectionBackground(new Color(100, 149, 237));
+        tabela.setSelectionForeground(Color.BLACK);
+
+        tabela.setCursor(new Cursor(Cursor.HAND_CURSOR));  // Muda para cursor de "mão"
+
+        // Ajustando fonte e altura das células
+        tabela.setFont(new Font("Arial", Font.PLAIN, 12));
+
         tabela.setShowGrid(true);
-        tabela.setGridColor(Color.gray);
+        tabela.setGridColor(Color.GRAY);
         tabela.setShowHorizontalLines(true);
         tabela.setShowVerticalLines(true);
+
+        // Customização do JScrollPane
         JScrollPane scrollPane = new JScrollPane(tabela);
-        JPanel painelTeste = painelPrograma.createTestePanel(scrollPane);
+        scrollPane.setBorder(BorderFactory.createLineBorder(new Color(192, 192, 192), 1));
+        scrollPane.setViewportBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+
+        JTableHeader header = tabela.getTableHeader();
+        header.setFont(new Font("Arial", Font.PLAIN, 12));
+        header.setBackground(Color.LIGHT_GRAY);
+        header.setForeground(Color.BLACK);
+
+        // Configura o layout corretamente para evitar deslocamentos
+        JPanel painelTeste = new JPanel(new BorderLayout());
+        painelTeste.add(scrollPane, BorderLayout.CENTER);
+
         tabbedPane.addTab("Teste", painelTeste);
         tabbedPane.revalidate();
         tabbedPane.repaint();
+
+        // Alinhamento e renderização com bordas suaves
+        tabela.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(
+                    JTable table, Object value, boolean isSelected, boolean hasFocus,
+                    int row, int column) {
+
+                JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                label.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+                label.setHorizontalAlignment(SwingConstants.CENTER);
+
+                if (!isSelected) {
+                    if (row % 2 == 0) label.setBackground(new Color(245, 245, 245));
+                    else label.setBackground(Color.lightGray);
+                }
+                return label;
+            }
+        });
+
+        // Tooltip nas células
+        tabela.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                int row = tabela.rowAtPoint(e.getPoint());
+                int col = tabela.columnAtPoint(e.getPoint());
+                if (row > -1 && col > -1) {
+                    Object value = tabela.getValueAt(row, col);
+                    if (value != null) {
+                        tabela.setToolTipText(value.toString());
+                    }
+                }
+            }
+        });
     }
+
+
+
+
+
+
 
     //getters
     public JFrame getFrame() {
