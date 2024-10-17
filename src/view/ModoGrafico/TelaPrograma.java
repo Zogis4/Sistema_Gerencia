@@ -1,7 +1,10 @@
 package view.ModoGrafico;
 
+import model.ConectorDB;
 import model.identificadores.Funcionario;
 import model.identificadores.Produto;
+import model.identificadores.RetornoDescribe;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.Vector;
@@ -52,6 +55,7 @@ public class TelaPrograma extends JPanel{
         tabbedPane.addTab("Produtos", produtosPanel);
         tabbedPane.addTab("Pedidos", pedidosPanel);
 
+
         System.out.println(tabbedPane.getHeight() + " " + tabbedPane.getWidth());
 
         gradientPanel.add(tabbedPane, BorderLayout.CENTER);
@@ -60,6 +64,7 @@ public class TelaPrograma extends JPanel{
 
         return this;
     }
+
 
     public void renderizarPainelPrograma(JFrame frame, TelaLogin login, TelaPrograma telaPrograma) {
         logoIcon = new ImageIcon("logoEmpresa.png");
@@ -601,8 +606,6 @@ public class TelaPrograma extends JPanel{
     public JTable atualizarTabelaFuncionarios(Vector<Vector<Object>> vectorDados, Vector<String> vectorNomeColunas){
         return new JTable(vectorDados, vectorNomeColunas);
     }
-
-
 
     // Implementação do painel com marca d'água
     class WatermarkPanel extends JPanel {

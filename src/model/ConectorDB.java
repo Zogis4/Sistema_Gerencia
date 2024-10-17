@@ -155,7 +155,81 @@ public class ConectorDB {
         return null;
     }
 
-    public RetornoDescribe testeTabela(){
+    public RetornoDescribe TabelaEmpresa(){
+        Vector<Vector<Object>> vectorDados = new Vector<>();
+        Vector<String> vectorNomeColunas = new Vector<>();
+        String query = "describe `gestão-produtos`.`Empresa`;";
+
+        try{
+            PreparedStatement stmt = connection.prepareCall(query);
+            ResultSet rs = stmt.executeQuery();
+
+            ArrayList<String> temp = new ArrayList<>();
+
+            //pega dinamicamente todos os campos que serão escolhidos
+            while (rs.next()) {
+                temp.add(rs.getString("Field"));
+            }
+
+            vectorNomeColunas = new Vector<>(temp);
+
+            query = "select * from `gestão-produtos`.`Empresa`;";
+            stmt = connection.prepareCall(query);
+            rs = stmt.executeQuery();
+
+            // adiciona os dados de cada coluna 1 por 1 e passa pra prox coluna
+            while(rs.next()){
+                Vector<Object> vectorColuna = new Vector<>();
+                for (String col: temp){
+                    vectorColuna.add(rs.getObject(col));
+                }
+                vectorDados.add(vectorColuna);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return new RetornoDescribe(vectorDados,vectorNomeColunas);
+    }
+
+    public RetornoDescribe TabelaEstoque(){
+        Vector<Vector<Object>> vectorDados = new Vector<>();
+        Vector<String> vectorNomeColunas = new Vector<>();
+        String query = "describe `gestão-produtos`.`Estoque`;";
+
+        try{
+            PreparedStatement stmt = connection.prepareCall(query);
+            ResultSet rs = stmt.executeQuery();
+
+            ArrayList<String> temp = new ArrayList<>();
+
+            //pega dinamicamente todos os campos que serão escolhidos
+            while (rs.next()) {
+                temp.add(rs.getString("Field"));
+            }
+
+            vectorNomeColunas = new Vector<>(temp);
+
+            query = "select * from `gestão-produtos`.`Estoque`;";
+            stmt = connection.prepareCall(query);
+            rs = stmt.executeQuery();
+
+            // adiciona os dados de cada coluna 1 por 1 e passa pra prox coluna
+            while(rs.next()){
+                Vector<Object> vectorColuna = new Vector<>();
+                for (String col: temp){
+                    vectorColuna.add(rs.getObject(col));
+                }
+                vectorDados.add(vectorColuna);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return new RetornoDescribe(vectorDados,vectorNomeColunas);
+    }
+
+    public RetornoDescribe TabelaFuncionarios(){
         Vector<Vector<Object>> vectorDados = new Vector<>();
         Vector<String> vectorNomeColunas = new Vector<>();
         String query = "describe `gestão-produtos`.`Funcionarios`;";
@@ -191,6 +265,118 @@ public class ConectorDB {
         }
         return new RetornoDescribe(vectorDados,vectorNomeColunas);
     }
+
+    public RetornoDescribe TabelaLogin(){
+        Vector<Vector<Object>> vectorDados = new Vector<>();
+        Vector<String> vectorNomeColunas = new Vector<>();
+        String query = "describe `gestão-produtos`.`Login`;";
+
+        try{
+            PreparedStatement stmt = connection.prepareCall(query);
+            ResultSet rs = stmt.executeQuery();
+
+            ArrayList<String> temp = new ArrayList<>();
+
+            //pega dinamicamente todos os campos que serão escolhidos
+            while (rs.next()) {
+                temp.add(rs.getString("Field"));
+            }
+
+            vectorNomeColunas = new Vector<>(temp);
+
+            query = "select * from `gestão-produtos`.`Login`;";
+            stmt = connection.prepareCall(query);
+            rs = stmt.executeQuery();
+
+            // adiciona os dados de cada coluna 1 por 1 e passa pra prox coluna
+            while(rs.next()){
+                Vector<Object> vectorColuna = new Vector<>();
+                for (String col: temp){
+                    vectorColuna.add(rs.getObject(col));
+                }
+                vectorDados.add(vectorColuna);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return new RetornoDescribe(vectorDados,vectorNomeColunas);
+    }
+
+    public RetornoDescribe TabelaPedido(){
+        Vector<Vector<Object>> vectorDados = new Vector<>();
+        Vector<String> vectorNomeColunas = new Vector<>();
+        String query = "describe `gestão-produtos`.`Pedidos`;";
+
+        try{
+            PreparedStatement stmt = connection.prepareCall(query);
+            ResultSet rs = stmt.executeQuery();
+
+            ArrayList<String> temp = new ArrayList<>();
+
+            //pega dinamicamente todos os campos que serão escolhidos
+            while (rs.next()) {
+                temp.add(rs.getString("Field"));
+            }
+
+            vectorNomeColunas = new Vector<>(temp);
+
+            query = "select * from `gestão-produtos`.`Pedidos`;";
+            stmt = connection.prepareCall(query);
+            rs = stmt.executeQuery();
+
+            // adiciona os dados de cada coluna 1 por 1 e passa pra prox coluna
+            while(rs.next()){
+                Vector<Object> vectorColuna = new Vector<>();
+                for (String col: temp){
+                    vectorColuna.add(rs.getObject(col));
+                }
+                vectorDados.add(vectorColuna);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return new RetornoDescribe(vectorDados,vectorNomeColunas);
+    }
+
+    public RetornoDescribe TabelaProduto(){
+        Vector<Vector<Object>> vectorDados = new Vector<>();
+        Vector<String> vectorNomeColunas = new Vector<>();
+        String query = "describe `gestão-produtos`.`Produtos`;";
+
+        try{
+            PreparedStatement stmt = connection.prepareCall(query);
+            ResultSet rs = stmt.executeQuery();
+
+            ArrayList<String> temp = new ArrayList<>();
+
+            //pega dinamicamente todos os campos que serão escolhidos
+            while (rs.next()) {
+                temp.add(rs.getString("Field"));
+            }
+
+            vectorNomeColunas = new Vector<>(temp);
+
+            query = "select * from `gestão-produtos`.`Produtos`;";
+            stmt = connection.prepareCall(query);
+            rs = stmt.executeQuery();
+
+            // adiciona os dados de cada coluna 1 por 1 e passa pra prox coluna
+            while(rs.next()){
+                Vector<Object> vectorColuna = new Vector<>();
+                for (String col: temp){
+                    vectorColuna.add(rs.getObject(col));
+                }
+                vectorDados.add(vectorColuna);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return new RetornoDescribe(vectorDados,vectorNomeColunas);
+    }
+
    /*
    public static ArrayList<Empresa> InsertEmpresa(){
         String insertQuery = "Insert into `gestão-produtos`.`empresa`(`Empresa_id`,`Empresa_nome`) VALUES (\"1\",\"TechNova Solutions\"),(\"2\",\"GreenWave Industries\"),(\"3\",\"BlueSky Innovations\"),(\"4\",\"UrbanVista Architects\"),(\"5\",\"NextGen Dynamics\"),(\"6\",\"BrightFuture Investments\"),(\"7\",\"QuantumLeap Technologies\"),(\"8\",\"EcoSphere Enterprises\"),(\"9\",\"FutureLink Networks\"),(\"10\",\"Pinnacle Global\"),(\"11\",\"VistaCore Technologies\"),(\"12\",\"SilverLining Cloud Services\"),(\"13\",\"Zenith Financial Group\"),(\"14\",\"Harmony Wellness Solutions\"),(\"15\",\"AeroFlex Logistics\"),(\"16\",\"Solaris Energy Group\"),(\"17\",\"CrystalWave Technologies\"),(\"18\",\"NovaTerra Real Estate\"),(\"19\",\"PrimePath Consulting\"),(\"20\",\"InnovaTech Labs\");\n";
